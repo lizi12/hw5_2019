@@ -12,13 +12,12 @@ class QuestionnaireAnalysis:
     Should be able to accept strings and pathlib.Path objects.
     """
     def __init__(self, data_fname: Union[pathlib.Path, str]): #type hinting (doesn't make it str), union: can be both str or path, -> hinting for functions
-        data_fname = pathlib.Path(data_fname)
-        #validate that the file exits
-        assert data_fname.exists()
-        # Checking that the file name is str or Path
-        if not isinstance(data_fname, (str, pathlib.Path)):
-            raise TypeError("The file name must be str or pathlib.Path")
-        self.data_fname = data_fname
+        if isinstance(data_fname, str):
+            self.data_fname = pathlib.Path(data_fname)
+        else:
+            self.data_fname = data_fname
+        if not (self.data_fname.exists() and self.data_fname.is_file()):
+            raise ValueError("File does not exist")
         self.data = None
         
           
