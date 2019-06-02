@@ -19,6 +19,7 @@ class QuestionnaireAnalysis:
         if not isinstance(data_fname, (str, pathlib.Path)):
             raise TypeError("The file name must be str or pathlib.Path")
         self.data_fname = data_fname
+        self.data = None
         
           
     def read_data(self):
